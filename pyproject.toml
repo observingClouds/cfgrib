@@ -9,29 +9,20 @@ description = "Python interface to map GRIB files to the NetCDF Common Data Mode
 readme = "README.md"
 license = "Apache-2.0"
 requires-python = ">=3.7"
-keywords = [
-    "eccodes",
-    "grib",
-    "xarray",
-]
+keywords = ["eccodes", "grib", "xarray"]
 classifiers = [
-    "Development Status :: 4 - Beta",
-    "Intended Audience :: Developers",
-    "License :: OSI Approved :: Apache Software License",
-    "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
-    "Programming Language :: Python :: Implementation :: CPython",
-    "Programming Language :: Python :: Implementation :: PyPy",
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.7",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = [
-    "attrs>=19.2",
-    "click",
-    "eccodes>=0.9.8",
-    "numpy",
-]
+dependencies = ["attrs>=19.2", "click", "eccodes>=0.9.8", "numpy"]
 
 [[project.authors]]
 name = "European Centre for Medium-Range Weather Forecasts (ECMWF)"
@@ -39,16 +30,14 @@ email = "software.support@ecmwf.int"
 
 [project.optional-dependencies]
 tests = [
-    "dask[array]",
-    "flake8",
-    "pytest",
-    "pytest-cov",
-    "scipy",
-    "xarray>=0.15",
+  "dask[array]",
+  "flake8",
+  "pytest",
+  "pytest-cov",
+  "scipy",
+  "xarray>=0.15",
 ]
-xarray = [
-    "xarray>=0.15",
-]
+xarray = ["xarray>=0.15"]
 
 [project.scripts]
 cfgrib = "cfgrib.__main__:cfgrib_cli"
@@ -63,9 +52,7 @@ Homepage = "https://github.com/ecmwf/cfgrib"
 path = "cfgrib/__init__.py"
 
 [tool.hatch.build.targets.sdist]
-include = [
-    "/cf2cdm",
-]
+include = ["/cf2cdm"]
 
 [[tool.mypy.overrides]]
 module = "cfgrib.xarray_plugin"
@@ -80,11 +67,7 @@ profile = "black"
 line_length = 99
 
 [tool.pytest.ini_options]
-norecursedirs = [
-    "build",
-    "docs",
-    ".tox"
-]
+norecursedirs = ["build", "docs", ".tox"]
 
 [tool.coverage.run]
 branch = true
