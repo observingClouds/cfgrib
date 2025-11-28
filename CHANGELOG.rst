@@ -2,6 +2,13 @@
 Changelog for cfgrib
 ====================
 
+unreleased
+----------
+
+- Setup and apply linters via pre-commit.
+  See `#439 <https://github.com/ecmwf/cfgrib/pull/439>`_.
+
+
 0.9.15.1 (2025-09-30)
 ---------------------
 
