@@ -12,6 +12,8 @@ repos:
     rev: v1.18.2
     hooks:
       - id: mypy
+        additional_dependencies:
+          - attrs
   - repo: https://github.com/psf/black-pre-commit-mirror
     rev: 25.11.0
     hooks:
