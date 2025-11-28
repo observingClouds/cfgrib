@@ -148,9 +148,9 @@ def test_open_datasets_different_step_types() -> None:
         print("Using the old shortName for Convective precipitation rate")
         cpr0 = res[0]["cprat"]
         cpr1 = res[1]["cprat"]
-    assert cpr0.attrs["GRIB_stepType"]   == "instant"
+    assert cpr0.attrs["GRIB_stepType"] == "instant"
     assert res[0].cfrzr.attrs["GRIB_stepType"] == "instant"
-    assert cpr1.attrs["GRIB_stepType"]   == "avg"
+    assert cpr1.attrs["GRIB_stepType"] == "avg"
     assert res[1].cfrzr.attrs["GRIB_stepType"] == "avg"
 
 
@@ -167,9 +167,9 @@ def test_open_datasets_different_step_types_zeros() -> None:
         print("Using the old shortName for Convective precipitation rate")
         cpr0 = res[0]["cprat"]
         cpr1 = res[1]["cprat"]
-    assert cpr0.attrs["GRIB_stepType"]   == "instant"
+    assert cpr0.attrs["GRIB_stepType"] == "instant"
     assert res[0].cfrzr.attrs["GRIB_stepType"] == "instant"
-    assert cpr1.attrs["GRIB_stepType"]   == "avg"
+    assert cpr1.attrs["GRIB_stepType"] == "avg"
     assert res[1].cfrzr.attrs["GRIB_stepType"] == "avg"
 
 
