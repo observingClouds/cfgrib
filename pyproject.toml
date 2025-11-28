@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "cfgrib"
 dynamic = ["version"]
 description = "Python interface to map GRIB files to the NetCDF Common Data Model following the CF Convention using ecCodes."
-readme = "README.md"
+readme = "README.rst"
 license = "Apache-2.0"
 requires-python = ">=3.7"
 keywords = ["eccodes", "grib", "xarray"]
