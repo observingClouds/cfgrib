@@ -2,6 +2,13 @@
 Changelog for cfgrib
 ====================
 
+unreleased
+----------
+
+- Deprecating setuptools in favor of hatchling and pyproject.toml.
+  See `#438 <https://github.com/ecmwf/cfgrib/pull/438>`_.
+
+
 0.9.15.1 (2025-09-30)
 ---------------------
 
