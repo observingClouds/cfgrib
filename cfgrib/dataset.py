@@ -45,7 +45,7 @@ DATA_ATTRIBUTES_KEYS = [
     "stepUnits",
     "stepType",
     "gridType",
-    "uvRelativeToGrid"
+    "uvRelativeToGrid",
 ]
 
 EXTRA_DATA_ATTRIBUTES_KEYS = [
@@ -507,7 +507,9 @@ def build_variable_components(
     extra_attrs = read_data_var_attrs(first, extra_keys)
     data_var_attrs.update(**extra_attrs)
     coords_map = encode_cf_first(
-        data_var_attrs, encode_cf, time_dims,
+        data_var_attrs,
+        encode_cf,
+        time_dims,
     )
     coord_name_key_map = {}
     coord_vars = {}
@@ -689,7 +691,7 @@ def build_dataset_components(
             " be decoded as datetime objects:\n"
             f"{ALL_REF_TIME_KEYS}"
         )
-    
+
     for param_id in index.get("paramId", []):
         var_index = index.subindex(paramId=param_id)
         try:
@@ -825,5 +827,7 @@ def open_file(
     path = os.fspath(path)
     stream = messages.FileStream(path, errors=errors)
     index_keys = compute_index_keys(time_dims, extra_coords)
-    index = open_fileindex(stream, indexpath, index_keys, ignore_keys=ignore_keys, filter_by_keys=filter_by_keys)
+    index = open_fileindex(
+        stream, indexpath, index_keys, ignore_keys=ignore_keys, filter_by_keys=filter_by_keys
+    )
     return open_from_index(index, read_keys, time_dims, extra_coords, errors=errors, **kwargs)

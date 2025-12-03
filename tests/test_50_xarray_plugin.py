@@ -169,7 +169,9 @@ def test_xr_open_dataset_file_missing_vals() -> None:
 
 def test_xr_open_dataset_coords_to_attributes() -> None:
     ds = xr.open_dataset(
-        TEST_DATA_MULTI_LEVTYPES, engine="cfgrib", coords_as_attributes=["surface", "depthBelowLandLayer"]
+        TEST_DATA_MULTI_LEVTYPES,
+        engine="cfgrib",
+        coords_as_attributes=["surface", "depthBelowLandLayer"],
     )
     assert "surface" not in ds.coords
     assert "depthBelowLandLayer" not in ds.coords
