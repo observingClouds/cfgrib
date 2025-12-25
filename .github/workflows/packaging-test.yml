@@ -63,13 +63,11 @@ jobs:
       - uses: hynek/setup-cached-uv@v2
 
       - name: Run tests against whl
-        run: >
-          uvx --with tox-uv tox run
-          --installpkg dist/*.whl
-          -f py${PYTHON//./}-tests
+        run: |
+          uv run --with dist/*.whl --group test --python ${{ matrix.python-version }} \
+            pytest -v --cache-clear
       
       - name: Run tests against sdist
-        run: >
-          uvx --with tox-uv tox run
-          --installpkg dist/*.tar.gz
-          -f py${PYTHON//./}-tests
+        run: |
+          uv run --with dist/*.tar.gz --group test --python ${{ matrix.python-version }} \
+            pytest -v --cache-clear

@@ -26,9 +26,8 @@ classifiers = [
 dependencies = ["attrs>=19.2", "click", "eccodes>=0.9.8", "numpy"]
 
 [dependency-groups]
-tests = [
+test = [
   "dask[array]",
-  "flake8",
   "pytest",
   "pytest-cov",
   "scipy",
@@ -41,6 +40,14 @@ docs = [
   "future",
   "nomkl",
   "sphinx",
+  "xarray<2025.6.0",
+]
+qc = [
+  "dask[array]",
+  "flake8",
+  "pytest",
+  "pytest-cov",
+  "scipy",
   "xarray<2025.6.0",
 ]
 
@@ -96,6 +103,33 @@ line_length = 99
 
 [tool.pytest.ini_options]
 norecursedirs = ["build", "docs", ".tox"]
+
+[tool.hatch.envs.test]
+dependency-groups = [
+  "test",
+]
+
+[tool.hatch.envs.test.scripts]
+run = "pytest -v --cache-clear {args}"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13", "3.14"]
+
+[tool.hatch.envs.docs]
+dependency-groups = [
+  "docs",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "sphinx-build -W -b html docs build/sphinx/html"
+
+[tool.hatch.envs.qc]
+dependency-groups = [
+  "qc",
+]
+
+[tool.hatch.envs.qc.scripts]
+run = "pytest -v --cov=cfgrib --cov=cf2cdm --cov-report=html --cache-clear {args}"
 
 [tool.coverage.run]
 branch = true
