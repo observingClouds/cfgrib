@@ -51,6 +51,9 @@ cfgrib = "cfgrib.xarray_plugin:CfGribBackend"
 [project.urls]
 Homepage = "https://github.com/ecmwf/cfgrib"
 
+[tool.check-wheel-contents]
+ignore = ["W009"]
+
 [tool.hatch.metadata.hooks.fancy-pypi-readme]
 content-type = "text/x-rst"
 fragments = [
