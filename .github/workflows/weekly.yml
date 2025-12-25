@@ -20,4 +20,4 @@ jobs:
       with:
         enable-cache: true
     - name: Run test suite Python ${{ matrix.python-version }}
-      run: uv run --group tests pytest -v --cov=cfgrib --cov=cf2cdm --cov-report=html --cache-clear
+      run: uv run --group tests pytest -v --cache-clear
