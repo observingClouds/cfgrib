@@ -45,7 +45,7 @@ jobs:
         with:
           sparse-checkout: |
             tox.ini
-          fetch-depth: 0
+            tests/
           persist-credentials: false
       - name: Download pre-built packages
         uses: actions/download-artifact@v6
