@@ -52,7 +52,7 @@ Homepage = "https://github.com/ecmwf/cfgrib"
 path = "cfgrib/__init__.py"
 
 [tool.hatch.build.targets.sdist]
-include = ["/cf2cdm"]
+include = ["cf2cdm", "cfgrib"]
 
 [[tool.mypy.overrides]]
 module = "cfgrib.xarray_plugin"
