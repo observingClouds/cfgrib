@@ -136,8 +136,11 @@ def test_build_dataset_components_ignore_keys() -> None:
     stream = messages.FileStream(TEST_DATA_UKMO, "warn")
     index = dataset.open_fileindex(stream, messages.DEFAULT_INDEXPATH, dataset.INDEX_KEYS)
     assert "subCentre" in index.index_keys
-    index = dataset.open_fileindex(stream, messages.DEFAULT_INDEXPATH, dataset.INDEX_KEYS, ignore_keys=["subCentre"])
+    index = dataset.open_fileindex(
+        stream, messages.DEFAULT_INDEXPATH, dataset.INDEX_KEYS, ignore_keys=["subCentre"]
+    )
     assert "subCentre" not in index.index_keys
+
 
 def test_Dataset() -> None:
     res = dataset.open_file(TEST_DATA)
@@ -339,6 +342,7 @@ def test_open_fieldset_ignore_keys() -> None:
 
     res = dataset.open_fieldset(fieldset, ignore_keys="subCentre")
     assert "GRIB_subCentre" not in res.attributes
+
 
 def test_open_file() -> None:
     res = dataset.open_file(TEST_DATA)

@@ -123,9 +123,8 @@ def test_dataset_missing_field_values() -> None:
 
 
 def test_valid_month_time_dim() -> None:
-    
+
     test_file = os.path.join(SAMPLE_DATA_FOLDER, "cams-egg4-monthly.grib")
     ds = xr.open_dataset(test_file, time_dims=["valid_month"])
 
     assert "valid_month" in ds.dims
-
