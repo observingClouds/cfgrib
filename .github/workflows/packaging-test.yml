@@ -66,7 +66,7 @@ jobs:
         run: |
           uv run --with dist/*.whl --group test --python ${{ matrix.python-version }} \
             pytest -v --cache-clear
-      
+
       - name: Run tests against sdist
         run: |
           uv run --with dist/*.tar.gz --group test --python ${{ matrix.python-version }} \
