@@ -40,6 +40,13 @@ jobs:
       PYTHON: ${{ matrix.python-version }}
 
     steps:
+      - name: Get tox file
+        uses: actions/checkout@v6
+        with:
+          sparse-checkout: |
+            tox.ini
+          fetch-depth: 0
+          persist-credentials: false
       - name: Download pre-built packages
         uses: actions/download-artifact@v6
         with:
@@ -47,7 +54,8 @@ jobs:
           path: dist
       - run: |
           tar xf dist/*.tar.gz --strip-components=1
-          rm -rf src
+          rm -rf cfgrib
+          rm -rf cf2cdm
       - uses: actions/setup-python@v6
         with:
           python-version: ${{ matrix.python-version }}

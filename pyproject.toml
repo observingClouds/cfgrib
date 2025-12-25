@@ -64,6 +64,9 @@ path = "cfgrib/__init__.py"
 [tool.hatch.build.targets.sdist]
 include = ["cf2cdm", "cfgrib"]
 
+[tool.hatch.build.targets.wheel]
+include = ["cf2cdm", "cfgrib"]
+
 [[tool.mypy.overrides]]
 module = "cfgrib.xarray_plugin"
 ignore_errors = true
