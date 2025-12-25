@@ -24,11 +24,7 @@ classifiers = [
 ]
 dependencies = ["attrs>=19.2", "click", "eccodes>=0.9.8", "numpy"]
 
-[[project.authors]]
-name = "European Centre for Medium-Range Weather Forecasts (ECMWF)"
-email = "software.support@ecmwf.int"
-
-[project.optional-dependencies]
+[dependency-groups]
 tests = [
   "dask[array]",
   "flake8",
@@ -37,6 +33,12 @@ tests = [
   "scipy",
   "xarray>=0.15",
 ]
+
+[[project.authors]]
+name = "European Centre for Medium-Range Weather Forecasts (ECMWF)"
+email = "software.support@ecmwf.int"
+
+[project.optional-dependencies]
 xarray = ["xarray>=0.15"]
 
 [project.scripts]
