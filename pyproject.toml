@@ -7,7 +7,7 @@ name = "cfgrib"
 dynamic = ["readme", "version"]
 description = "Python interface to map GRIB files to the NetCDF Common Data Model following the CF Convention using ecCodes."
 license = "Apache-2.0"
-requires-python = ">=3.7"
+requires-python = ">=3.10"
 keywords = ["eccodes", "grib", "xarray"]
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -32,6 +32,15 @@ tests = [
   "pytest",
   "pytest-cov",
   "scipy",
+  "xarray<2025.6.0",
+]
+docs = [
+  "attrs",
+  "cffi",
+  "eccodes",
+  "future",
+  "nomkl",
+  "sphinx",
   "xarray<2025.6.0",
 ]
 
