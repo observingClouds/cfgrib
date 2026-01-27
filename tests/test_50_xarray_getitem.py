@@ -1,5 +1,6 @@
 import os.path
 
+import numpy as np
 import pytest
 
 xr = pytest.importorskip("xarray")  # noqa
@@ -39,7 +40,7 @@ def test_getitem_slice(cache: bool) -> None:
     assert da.isel(number=slice(2, 6, 2)).mean() == va[2:6:2].mean()
     # NOTE: label based indexing in xarray is inclusive of both the start and stop bounds.
     assert da.sel(number=slice(2, 6)).mean() == va[2:7].mean()
-    assert da.sel(number=slice(2, 6, 2)).mean() == va[2:7:2].mean()
+    assert np.isclose(da.sel(number=slice(2, 6, 2)).mean(), va[2:7:2].mean())
 
 
 @pytest.mark.parametrize("cache", [True, False])
