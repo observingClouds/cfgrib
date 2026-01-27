@@ -531,8 +531,11 @@ class FileIndex(FieldsetIndex):
         # Reading and writing the index can be explicitly suppressed by passing indexpath==''.
         if not indexpath:
             return cls.from_fieldset(filestream, index_keys, computed_keys)
-
-        hash = hashlib.md5(repr(index_keys).encode("utf-8")).hexdigest()
+        repr_index_keys = repr(index_keys).encode("utf-8")
+        try:
+            hash = hashlib.md5(repr_index_keys, usedforsecurity=False).hexdigest()
+        except TypeError:
+            hash = hashlib.md5(repr_index_keys).hexdigest()
         indexpath = indexpath.format(path=filestream.path, hash=hash, short_hash=hash[:5])
         try:
             with compat_create_exclusive(indexpath) as new_index_file:
