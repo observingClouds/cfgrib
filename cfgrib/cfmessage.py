@@ -80,7 +80,7 @@ def to_grib_date_time(
     message, time_ns, date_key="dataDate", time_key="dataTime", epoch=DEFAULT_EPOCH
 ):
     # type: (abc.MutableField, int, str, str, datetime.datetime) -> None
-    time_s = int(time_ns) * 1e-9
+    time_s = time_ns.astype(np.int64) * 1e-9
     time = epoch + datetime.timedelta(seconds=time_s)
     datetime_iso = str(time)
     message[date_key] = int(datetime_iso[:10].replace("-", ""))
