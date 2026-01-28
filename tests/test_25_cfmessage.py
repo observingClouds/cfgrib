@@ -19,7 +19,7 @@ def test_from_grib_date_time() -> None:
 
 def test_to_grib_date_time() -> None:
     message = {}  # type: T.Dict[str, T.Any]
-    datetime_ns = np.datetime64("2001-10-11T01:01:00", "ns").item()
+    datetime_ns = np.datetime64("2001-10-11T01:01:00", "ns")
 
     cfmessage.to_grib_date_time(message, datetime_ns)
 
