@@ -2,6 +2,9 @@ import os
 import pathlib
 import typing as T
 
+import fsspec
+import fsspec.core
+
 import numpy as np
 import xarray as xr
 from packaging.version import Version
@@ -34,11 +37,13 @@ class CfGribDataStore(AbstractDataStore):
         if lock is None:
             lock = ECCODES_LOCK
         self.lock = ensure_lock(lock)  # type: ignore
-        if isinstance(filename, (str, pathlib.PurePath)):
-            opener = dataset.open_file
+        if isinstance(filename, fsspec.core.OpenFile):
+            path = filename.fs.unstrip_protocol(filename.path)
+            self.ds = dataset.open_file(path, **backend_kwargs)
+        elif isinstance(filename, (str, pathlib.PurePath)):
+            self.ds = dataset.open_file(str(filename), **backend_kwargs)
         else:
-            opener = dataset.open_fieldset
-        self.ds = opener(filename, **backend_kwargs)
+            self.ds = dataset.open_fieldset(filename, **backend_kwargs)
 
     def open_store_variable(
         self,

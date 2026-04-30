@@ -26,6 +26,7 @@ import typing as T
 
 import attr
 import eccodes  # type: ignore
+import fsspec
 import numpy as np
 
 from . import abc
@@ -103,6 +104,25 @@ class Message(abc.MutableField):
 
         if codes_id is None:
             raise EOFError("End of file: %r" % file)
+        return cls(codes_id=codes_id, **kwargs)
+
+    @classmethod
+    def from_bytes(cls, data, offset=None, **kwargs):
+        # type: (bytes, T.Optional[OffsetType], T.Any) -> Message
+        field_in_message = 0
+        if isinstance(offset, tuple):
+            offset, field_in_message = offset
+        if offset is not None:
+            data = data.seek(offset)
+        codes_id = None
+        if field_in_message == 0:
+            codes_id = eccodes.codes_new_from_message(data)
+        else:
+            for _ in range(field_in_message + 1):
+                codes_id = eccodes.codes_new_from_message(data)
+
+        if codes_id is None:
+            raise EOFError("End of message: %r" % data)
         return cls(codes_id=codes_id, **kwargs)
 
     @classmethod
@@ -265,7 +285,7 @@ class FileStreamItems(T.ItemsView[OffsetType, Message]):
 
     def itervalues(self) -> T.Iterator[Message]:
         errors = self.filestream.errors
-        with open(self.filestream.path, "rb") as file:
+        with fsspec.open(self.filestream.path, "rb") as file:
             # enable MULTI-FIELD support on sequential reads (like when building the index)
             with multi_enabled(file):
                 valid_message_found = False
@@ -341,7 +361,7 @@ class FileStream(abc.MappingFieldset[OffsetType, Message]):
         return Message.from_file(file, offset, **kwargs)
 
     def __getitem__(self, item: T.Optional[OffsetType]) -> Message:
-        with open(self.path, "rb") as file:
+        with fsspec.open(self.path, "rb") as file:
             return self.message_from_file(file, offset=item)
 
     def __len__(self) -> int:
